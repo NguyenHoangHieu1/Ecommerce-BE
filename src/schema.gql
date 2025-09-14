@@ -1,0 +1,496 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input AddToCartInput {
+  """Product Id"""
+  productId: String!
+
+  """Quantity"""
+  quantity: Float!
+}
+
+type AuctionProduct {
+  """Product Id"""
+  _id: String!
+
+  """description of the product"""
+  description: String!
+
+  """End Of the auction"""
+  endOfAuction: String!
+
+  """Images of the product"""
+  images: [String!]!
+
+  """List of user Has bid in the auction"""
+  listOfUsersBid: [UserBid!]!
+
+  """price of the product"""
+  price: Float!
+
+  """Title of the product"""
+  title: String!
+
+  """user Id"""
+  userId: String!
+}
+
+input CheckTokenInput {
+  """The Token To Check"""
+  token: String!
+
+  """The userId To Check"""
+  userId: String!
+}
+
+input CreateAuctionProductInput {
+  """description of the product"""
+  description: String!
+
+  """End Of the auction"""
+  endOfAuction: String
+  images: [String!]!
+
+  """price of the product"""
+  price: Float!
+
+  """Title of the product"""
+  title: String!
+}
+
+input CreateProductInput {
+  """description of the product"""
+  description: String!
+
+  """discount"""
+  discount: Int
+  images: [String!]
+
+  """Tag Options"""
+  options: [OptionsType!]
+
+  """price of the product"""
+  price: Float!
+
+  """Stock"""
+  stock: Int!
+
+  """Title of the product"""
+  title: String!
+
+  """CsrfToken"""
+  token: String!
+}
+
+input CreateRatingInput {
+  """the product to rate"""
+  productId: String!
+
+  """The rating"""
+  rating: String!
+
+  """The star"""
+  stars: Int!
+
+  """The title of the rating"""
+  title: String!
+}
+
+input CreateUserInput {
+  """avatar"""
+  avatar: String
+
+  """email"""
+  email: String!
+
+  """password"""
+  password: String!
+
+  """username"""
+  username: String!
+}
+
+type Csrf {
+  """Created At"""
+  createdAt: DateTime!
+
+  """The Token CSRF"""
+  token: String!
+
+  """Updated At"""
+  updatedAt: DateTime!
+
+  """The User Id"""
+  userId: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type ErrorHandler {
+  """A message for the error"""
+  message: String!
+}
+
+type FavoriteProduct {
+  """Product Id"""
+  productId: String!
+
+  """UserId"""
+  userId: String!
+}
+
+input FindFavoriteProduct {
+  """Limit of favorite Products"""
+  limit: Float!
+
+  """Skip products"""
+  skip: Float!
+
+  """userId"""
+  userId: String!
+}
+
+input GetRatingInput {
+  """Limit the rating"""
+  limit: Int
+
+  """productId to find"""
+  productId: String!
+
+  """Skip the rating"""
+  skip: Int
+
+  """Stars"""
+  stars: Int
+}
+
+type HasSold {
+  """Date"""
+  date: DateTime!
+
+  """quantity"""
+  quantity: Float!
+
+  """User Id"""
+  userId: String!
+}
+
+union LoginUnionResult = ErrorHandler | jwtToken
+
+input LoginUserInput {
+  """Email"""
+  email: String!
+
+  """password"""
+  password: String!
+}
+
+input LoginVerifyToken {
+  """Token"""
+  token: String!
+}
+
+type MessageTypeHistory {
+  """date"""
+  date: DateTime!
+
+  """message"""
+  message: String!
+
+  """Sender"""
+  sender: String!
+}
+
+type Mutation {
+  AddRating(createRatingInput: CreateRatingInput!): Rating!
+  addToCart(addToCartInput: AddToCartInput!): Product!
+  createAuctionProduct(createAuctionProductInput: CreateAuctionProductInput!): AuctionProduct!
+  createCsrfToken(userId: String!): Csrf!
+  createOrder: Order!
+  createProduct(createProductInput: CreateProductInput!): Product!
+  register(createUserInput: CreateUserInput!): User!
+  removeItemFromCart(removeItemFromCartInput: RemoveItemFromCartInput!): Product!
+  removeProduct(removeProductInput: RemoveProductInput!): Product!
+  removeUser(id: String!): User!
+  resetPassword(resetPasswordInput: ResetPasswordInput!): User!
+  toggleDownvote(toggleDownvoteInput: ToggleVoteInput!): Rating!
+  toggleFavoriteProduct(toggleFavoriteProductInput: ToggleFavoriteProductInput!): FavoriteProduct!
+  toggleUpvote(toggleUpvoteInput: ToggleVoteInput!): Rating!
+  updateProduct(updateProductInput: UpdateProductInput!): Product!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+}
+
+type Options {
+  """optionName"""
+  optionName: String!
+
+  """Price"""
+  price: Float!
+}
+
+input OptionsType {
+  """optionName"""
+  optionName: String!
+
+  """Price"""
+  price: Float!
+}
+
+type Order {
+  _id: String!
+  date: DateTime!
+  products: [Product!]!
+  userId: String!
+}
+
+type Product {
+  """id of the product"""
+  _id: String!
+
+  """description of the product"""
+  description: String!
+
+  """discount of the product"""
+  discount: Int!
+  getSoldDate: String!
+
+  """has Sold of the product"""
+  hasSold: [HasSold!]!
+  images: [String!]!
+  options: [Options!]!
+
+  """price of the product"""
+  price: Float!
+
+  """Quantity of the product"""
+  quantity: Int
+
+  """Rating of a product"""
+  ratings: [Rating!]
+
+  """Stock of the products"""
+  stock: Int!
+
+  """Title of the product"""
+  title: String!
+
+  """User"""
+  user: User
+
+  """user Id"""
+  userId: String!
+}
+
+input ProductCountInput {
+  """Find all products of one user"""
+  userId: String
+
+  """Filter Words"""
+  words: String
+}
+
+input ProductFindOptions {
+  """Limit the number of received Products..."""
+  limit: Int
+
+  """ProductId so That we can find related Product"""
+  productId: String
+
+  """skip the number of the Products..."""
+  skip: Int
+
+  """Filter Words"""
+  words: String
+}
+
+type Query {
+  CheckCsrfToken(checkTokenInput: CheckTokenInput!): Csrf!
+  CheckJwtToken(token: String!): User!
+  countProducts(productCountInput: ProductCountInput!): Int!
+  favoriteProduct(toggleFavoriteProductInput: ToggleFavoriteProductInput!): FavoriteProduct!
+  favoriteProducts(findFavoriteProduct: FindFavoriteProduct!): [FavoriteProduct!]!
+  findProductById(id: String!): Product!
+  findRecommendedProducts(productFindOptions: ProductFindOptions!): [Product!]!
+  forgetPassword(email: String!): User!
+  getAllMessages: [User!]!
+  getCartItems: [Product!]!
+  getRatings(getRatingInput: GetRatingInput!): [Rating!]!
+  getRatingsCount(productId: String!): Int!
+  getSoldDate: String!
+  login(loginUserInput: LoginUserInput!): LoginUnionResult!
+  orders: [Order!]!
+  products(productFindOptions: ProductFindOptions!): [Product!]!
+  productsOfUser(userId: String!): [Product!]!
+  userFindByEmail(email: String!): User!
+  userFindById(id: String!): User!
+  users: [User!]!
+  verifyToken(loginVerifyToken: LoginVerifyToken!): User!
+}
+
+type Rating {
+  """_id"""
+  _id: String
+
+  """Date"""
+  createdAt: DateTime!
+
+  """downvote of the rating"""
+  downvote: [String!]
+
+  """Rating"""
+  rating: String!
+
+  """stars"""
+  stars: Int!
+
+  """title"""
+  title: String!
+
+  """upvote of the rating"""
+  upvote: [String!]
+
+  """userId"""
+  userId: String!
+}
+
+input RemoveItemFromCartInput {
+  """Product ID"""
+  productId: String!
+
+  """Quantity"""
+  quantity: Int!
+}
+
+input RemoveProductInput {
+  productId: String!
+  token: String!
+  userId: String!
+}
+
+input ResetPasswordInput {
+  """Password"""
+  password: String!
+
+  """token"""
+  token: String!
+
+  """userId"""
+  userId: String!
+}
+
+input ToggleFavoriteProductInput {
+  """Product Id"""
+  productId: String!
+
+  """User Id"""
+  userId: String!
+}
+
+input ToggleVoteInput {
+  """productId"""
+  productId: String!
+
+  """ratingId"""
+  ratingId: String!
+}
+
+input UpdateProductInput {
+  """Id of the product"""
+  _id: String!
+
+  """description of the product"""
+  description: String
+
+  """discount"""
+  discount: Int
+
+  """images of the product"""
+  images: [String!]
+
+  """Options"""
+  options: [OptionsType!]
+
+  """price of the product"""
+  price: Float
+
+  """Stock"""
+  stock: Int
+
+  """Title of the product"""
+  title: String
+
+  """CsrfToken"""
+  token: String!
+}
+
+input UpdateUserInput {
+  """ID"""
+  _id: String!
+
+  """avatar"""
+  avatar: String
+
+  """email"""
+  email: String
+
+  """password"""
+  password: String
+
+  """username"""
+  username: String
+}
+
+type User {
+  """Id of The user"""
+  _id: String!
+
+  """avatar of the user"""
+  avatar: String!
+
+  """email of the user"""
+  email: String!
+
+  """Online Status"""
+  isOnline: Boolean!
+
+  """password of the user"""
+  password: String!
+
+  """Reputation"""
+  reputation: Int!
+
+  """revenue"""
+  revenue: Int!
+
+  """username of the user"""
+  username: String!
+}
+
+type UserBid {
+  """The money that the user has bid"""
+  price: Float!
+
+  """user Id Has bid in the auction"""
+  userId: String!
+}
+
+type jwtToken {
+  """Access Token for user loggedin"""
+  access_token: String!
+
+  """avatar"""
+  avatar: String!
+
+  """email"""
+  email: String!
+
+  """User ID"""
+  userId: String!
+
+  """Username"""
+  username: String!
+}
